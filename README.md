@@ -9,3 +9,6 @@ ref. https://docs.microsoft.com/en-us/azure/devops/extend/publish/overview?view=
 
 
 ref. https://docs.microsoft.com/en-us/azure/devops/extend/develop/add-hub?view=azure-devops
+
+api
+https://marketplace.visualstudio.com/manage/createpublisher?managePageRedirect=true

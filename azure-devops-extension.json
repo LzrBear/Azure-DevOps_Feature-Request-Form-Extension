@@ -1,0 +1,42 @@
+{
+    "manifestVersion": 1,
+    "id": "feature-request-form",
+    "publisher": "lzrbear",
+    "version": "1.0.15",
+    "name": "feature-request-form",
+    "description": "Azure DevOps Extension",
+    "categories": [
+        "Azure Boards"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "icons": {
+        "default": "static/images/logo.png"
+    },
+    "contributions": [
+        {
+            "id": "work-item-open-hub",
+            "type": "ms.vss-web.hub",
+            "targets": [
+                "ms.vss-work-web.work-hub-group"
+            ],
+            "properties": {
+                "name": "Feature Request Form",
+                "uri": "dist/feature-request-form/feature-request-form.html"
+            }
+        }
+    ],
+    "files": [
+        {
+            "path": "static",
+            "addressable": true
+        },
+        {
+            "path": "dist",
+            "addressable": true
+        }
+    ]
+}
