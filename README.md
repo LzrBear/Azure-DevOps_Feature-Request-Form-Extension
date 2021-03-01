@@ -12,3 +12,6 @@ ref. https://docs.microsoft.com/en-us/azure/devops/extend/develop/add-hub?view=a
 
 api
 https://marketplace.visualstudio.com/manage/createpublisher?managePageRedirect=true
+
+ui
+https://developer.microsoft.com/en-us/azure-devops/components/text-field#usage

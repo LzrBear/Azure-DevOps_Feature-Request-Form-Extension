@@ -1,23 +1,16 @@
 import * as React from "react";
 import * as SDK from "azure-devops-extension-sdk";
 
-// import "./WorkItemOpen.scss";
-
 import { Button } from "azure-devops-ui/Button";
-// import { ObservableArray, ObservableValue } from "azure-devops-ui/Core/Observable";
-// import { localeIgnoreCaseComparer } from "azure-devops-ui/Core/Util/String";
-// import { Dropdown } from "azure-devops-ui/Dropdown";
-// import { ListSelection } from "azure-devops-ui/List";
-// import { IListBoxItem } from "azure-devops-ui/ListBox";
 import { Header } from "azure-devops-ui/Header";
 import { Page } from "azure-devops-ui/Page";
-// import { TextField } from "azure-devops-ui/TextField";
+import { TextField } from "azure-devops-ui/TextField";
 
-// import { CommonServiceIds, getClient, IProjectPageService } from "azure-devops-extension-api";
-import { IWorkItemFormNavigationService, IWorkItemFormService, WorkItemTrackingRestClient, WorkItemTrackingServiceIds } from "azure-devops-extension-api/WorkItemTracking";
+import { ObservableValue } from "azure-devops-ui/Core/Observable";
+import { WorkItemTrackingServiceIds } from "azure-devops-extension-api/WorkItemTracking";
 
-// import { showRootComponent } from "../Common";
-
+const summaryObservable = new ObservableValue("");
+const descriptionObservable = new ObservableValue("");
 
 class FeatureRequestForm extends React.Component {
 
@@ -29,8 +22,6 @@ class FeatureRequestForm extends React.Component {
             workItemTypeValue: "Feature"
         };
 
-        this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-        this.handleSummaryChange = this.handleSummaryChange.bind(this);
         this.onCreateClick = this.onCreateClick.bind(this);
     }
 
@@ -40,44 +31,29 @@ class FeatureRequestForm extends React.Component {
 
     render() {
         return (
-            <Page className="sample-hub flex-grow">
+            <Page className="feature-request-form-hub flex-grow">
                 <Header title="Feature Request Form" />
                 <div className="page-content">
                     <div>
-                        <label>Summary</label>
-                        <br/>
-                        <textarea onChange={this.handleSummaryChange}></textarea>
-                        <br/>
-                        <br/>
-                        <label>Description</label>
-                        <br/>
-                        <textarea onChange={this.handleDescriptionChange}></textarea>
-                        <br/>
-                        <br/>
-                        <Button className="sample-work-item-button" text="Create" onClick={() => this.onCreateClick()} />
+                        <TextField label="Summary" value={summaryObservable} onChange={(e, newValue) => (summaryObservable.value = newValue)}/>
+                        <TextField label="Description" value={descriptionObservable} multiline="true" onChange={(e, newValue) => (descriptionObservable.value = newValue)}/>
+                        <br />
+                        <Button primary="true" className="create-button" text="Create" onClick={() => this.onCreateClick()} />
                     </div>
                 </div>
             </Page>
         );
     }
 
-    handleSummaryChange(event) {
-        this.setState({ summary: event.target.value });
-    }
-
-    handleDescriptionChange(event) {
-        this.setState({ description: event.target.value });
-    }
-
     onCreateClick() {
         var navSvc = SDK.getService(WorkItemTrackingServiceIds.WorkItemFormNavigationService);
         navSvc.then(x => {
             x.openNewWorkItem(this.state.workItemTypeValue, {
-                Title: this.state.summary,
+                Title: summaryObservable.value,
                 Tags: "",
                 priority: 1,
                 "System.AssignedTo": SDK.getUser().name,
-                Description: this.state.description
+                Description: descriptionObservable.value
             })
             // var t = SDK.getService(WorkItemTrackingServiceIds.WorkItemFormService);
             // t.then(y => {

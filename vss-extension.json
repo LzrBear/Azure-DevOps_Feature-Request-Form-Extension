@@ -2,9 +2,9 @@
     "manifestVersion": 1,
     "id": "feature-request-form",
     "publisher": "lzrbear",
-    "version": "1.0.32",
+    "version": "1.0.35",
     "name": "feature-request-form",
-    "description": "Azure DevOps Extension",
+    "description": "Adds a simple form to help users generate features by taking in key data and auto-populating the other fields",
     "categories": [
         "Azure Boards"
     ],
@@ -18,10 +18,10 @@
     },
     "contributions": [
         {
-            "id": "work-item-open-hub",
+            "id": "new-feature",
             "type": "ms.vss-web.hub",
             "targets": [
-                "ms.vss-work-web.work-hub-group"
+                "ms.vss-web.home-hub-group"
             ],
             "properties": {
                 "name": "Feature Request Form",
